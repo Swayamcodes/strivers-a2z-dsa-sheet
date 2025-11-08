@@ -342,60 +342,58 @@ void explainUnorderdMap()
 }
 
 
-bool comp(pair<int, int> p1, pair<int, int> p2)
-{
-    if (p1.second < p2.second)
-        return true;
-    if (p1.second > p2.second)
-        return false; // swap
-    //    if they are same
+#include <bits/stdc++.h>
+using namespace std;
 
-    if (p1.first > p2.first)
-        return true;
-    return false;
+// Custom comparator for pairs
+bool comp(pair<int, int> p1, pair<int, int> p2) {
+    if (p1.second != p2.second) {
+        return p1.second < p2.second;  // Sort by second element (ascending)
+    }
+    return p1.first > p2.first;  // If equal, sort by first (descending)
 }
-
 
 void explainExtra()
 {
+    int n = 5;
+    int a[] = {5, 3, 8, 1, 9};
+    vector<int> v = {5, 3, 8, 1, 9};
 
+    // 1. Basic sorting (ascending)
     sort(a, a + n);
     sort(v.begin(), v.end());
 
-    sort(a_2, a + 4);
-    sort(a, a + n, greater<int>);
+    // 2. Sort first 4 elements
+    sort(a, a + 4);
 
-    pair<int, int> a[] = {{1, 2}, {2, 1}, {4, 1}};
-    // sort it according to second element
-    // if second element is same, then sort
-    // it according to first elememt but in descending
+    // 3. Sort in descending order
+    sort(a, a + n, greater<int>());
 
-    sort(a, a + n, comp);
-    // {{4,1}, {2,1}, {1,2}}
+    // 4. Sort pairs with custom comparator
+    pair<int, int> pairs[] = {{1, 2}, {2, 1}, {4, 1}};
+    sort(pairs, pairs + 3, comp);
+    // Result: {{4,1}, {2,1}, {1,2}}
 
+    // 5. Count set bits (popcount)
     int num = 7;
-    int cnt = __builtin_popcount();
-    long long num = 1234566743373;
-    int cnt = __builtin_popcountll();
+    int cnt = __builtin_popcount(num);  // cnt = 3 (binary: 111)
+    
+    long long num2 = 1234566743373;
+    int cnt2 = __builtin_popcountll(num2);  // For long long
 
+    // 6. Generate all permutations
     string s = "123";
-    sort(s.begin(), s.end());
-    do
-    {
+    sort(s.begin(), s.end());  // Must sort first
+    do {
         cout << s << endl;
     } while (next_permutation(s.begin(), s.end()));
-    int maxx = *max_element(a, a + n);
+    // Prints: 123, 132, 213, 231, 312, 321
+
+    // 7. Find maximum element
+    int maxx = *max_element(a, a + n);  // Don't forget the *
 }
 
-
-int main()
-{
-    // printName();
-    // int s;
-    // s = sum(1, 2);
-    // cout<<s;
-
-    //* explainPair();
-
+int main() {
+    explainExtra();
     return 0;
 }
